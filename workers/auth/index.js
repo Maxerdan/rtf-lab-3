@@ -1,7 +1,3 @@
- const fs = require('fs');
- const path = require('path');
-
-
 /**
  * Метод принимающий 3 парамметра
  * @param {string} name - имя
@@ -13,7 +9,7 @@ function authUser(req, res, next) {
         res.send({Error: 'Некоторые поля незаполненны, заполните Имя/Пароль'});
     }
 
-    let fo = fs.readFileSync(path.resolve('DB.txt'), 'utf8');
+    let fo = require('fs').readFileSync(require('path').resolve('DB.txt'), 'utf8');
     let name_pass = {};
     var names = new Array();
     var passes = new Array();
@@ -40,7 +36,7 @@ function postExample(req, res, next) {
     if (!name || !pass) {
         res.send({Error: 'Некоторые поля остались незаполненными, заполните Имя/Пароль'});
     }
-    fs.appendFile(path.resolve('DB.txt'), name + ' ' + pass+'\n', () => {});
+    require('fs').appendFile(require('path').resolve('DB.txt'), name + ' ' + pass+'\n', () => {});
     
     res.json({Success: true});
 }
